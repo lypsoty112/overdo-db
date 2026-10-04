@@ -1,0 +1,16 @@
+# Local Postgres for Overdo. Host port 5433 so it never fights a Postgres already on 5432;
+# overdo-api and the migration runner both default to this exact URL.
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: overdo
+      POSTGRES_PASSWORD: overdo
+      POSTGRES_DB: overdo
+    ports:
+      - "5433:5432"
+    volumes:
+      - overdo-data:/var/lib/postgresql/data
+
+volumes:
+  overdo-data:
